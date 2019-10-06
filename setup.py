@@ -35,7 +35,7 @@ elif sys.argv[-1] == 'clean':
 
 setup(
     name="selenium-crawler-template",
-    version="0.0.1",
+    version="0.0.2",
     author="Yeongbin Jo",
     author_email="iam.yeongbin.jo@gmail.com",
     description="Boilerplate for developing crawler with Selenium.",

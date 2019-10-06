@@ -7,11 +7,11 @@ from selenium.webdriver.common.by import By
 
 
 class Crawler(object):
-    def __init__(self, headless=True):
+    def __init__(self, headless=True, timeout=3):
         options = Options()
         options.headless = headless
         self.driver = webdriver.Chrome(options=options)
-        self.timeout = 3
+        self.timeout = timeout
         self.driver.implicitly_wait(self.timeout)
 
     def __enter__(self):
