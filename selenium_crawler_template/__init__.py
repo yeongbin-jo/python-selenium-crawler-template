@@ -2,6 +2,7 @@ from functools import wraps
 
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, NoAlertPresentException
+from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
@@ -87,10 +88,16 @@ class Crawler(object):
         return eles
 
     def resolve_alert(self):
+        """Accept alert regardless of existence"""
         try:
             self.driver.switch_to.alert.accept()
         except NoAlertPresentException:
             pass
+
+    def click_action(self, element, offset_x=3, offset_y=3):
+        """Action for clicking location of element"""
+        ac = ActionChains(self.driver)
+        ac.move_to_element(element).move_by_offset(offset_x, offset_y).click().perform()
 
     def crawl(self, **kwargs):
         """
