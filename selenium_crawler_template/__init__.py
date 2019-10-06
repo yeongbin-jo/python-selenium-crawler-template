@@ -1,7 +1,7 @@
 from functools import wraps
 
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, NoAlertPresentException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
@@ -60,27 +60,37 @@ class Crawler(object):
 
         return wrapper
 
-    def find_element(self, css_selector, timeout=3):
+    def find_element(self, css_selector, from_element=None, timeout=3):
         """Find dom element via CSS selector w/o NoSuchElementException"""
+        if not from_element:
+            from_element = self.driver
         self.driver.implicitly_wait(timeout)
         ele = None
         try:
-            ele = self.driver.find_element(By.CSS_SELECTOR, css_selector)
+            ele = from_element.find_element(By.CSS_SELECTOR, css_selector)
         except NoSuchElementException:
             pass
         self.driver.implicitly_wait(self.timeout)
         return ele
 
-    def find_elements(self, css_selector, timeout=3):
+    def find_elements(self, css_selector, from_element=None, timeout=3):
         """Find dom elements via CSS selector w/o NoSuchElementException"""
+        if not from_element:
+            from_element = self.driver
         self.driver.implicitly_wait(timeout)
         eles = []
         try:
-            eles = self.driver.find_elements(By.CSS_SELECTOR, css_selector)
+            eles = from_element.find_elements(By.CSS_SELECTOR, css_selector)
         except NoSuchElementException:
             pass
         self.driver.implicitly_wait(self.timeout)
         return eles
+
+    def resolve_alert(self):
+        try:
+            self.driver.switch_to.alert.accept()
+        except NoAlertPresentException:
+            pass
 
     def crawl(self, **kwargs):
         """
