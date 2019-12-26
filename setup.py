@@ -5,12 +5,12 @@ import sys
 from setuptools import setup
 
 
-__author__ = 'Yeongbin Jo <iam.yeongbin.jo@gmail.com>'
+__author__ = 'Yeongbin Jo <yeongbin.jo@pylab.co>'
 __license__ = "GPLv3"
 
-__version__ = "0.0.1"
+__version__ = "0.1.0"
 __maintainer__ = "Yeongbin Jo"
-__email__ = "iam.yeongbin.jo@gmail.com"
+__email__ = "yeongbin.jo@pylab.co"
 __status__ = "Production"
 
 
@@ -35,9 +35,9 @@ elif sys.argv[-1] == 'clean':
 
 setup(
     name="selenium-crawler-template",
-    version="0.0.5",
+    version="0.1.0",
     author="Yeongbin Jo",
-    author_email="iam.yeongbin.jo@gmail.com",
+    author_email="yeongbin.jo@pylab.co",
     description="Boilerplate for developing crawler with Selenium.",
     license="MIT",
     keywords="chromedriver chrome selenium splinter",
@@ -59,5 +59,6 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
     ],
 )

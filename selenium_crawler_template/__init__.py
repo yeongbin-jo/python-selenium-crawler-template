@@ -8,11 +8,13 @@ from selenium.webdriver.common.by import By
 
 
 class Crawler(object):
-    def __init__(self, headless=True, window_size='1920,1080', timeout=3):
+    def __init__(self, headless=True, window_size='1920,1080', additional_options=[], timeout=3):
         options = Options()
         options.headless = headless
         if window_size:
             options.add_argument(f'--window-size={window_size}')
+        for o in additional_options:
+            options.add_argument(o)
         self.driver = webdriver.Chrome(options=options)
         self.timeout = timeout
         self.driver.implicitly_wait(self.timeout)
