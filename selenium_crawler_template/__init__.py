@@ -103,6 +103,15 @@ class Crawler(object):
         ac = ActionChains(self.driver)
         ac.move_to_element(element).move_by_offset(offset_x, offset_y).click().perform()
 
+    def move_action(self, element, offset_x=3, offset_y=3):
+        """Action for moving location of element"""
+        ac = ActionChains(self.driver)
+        ac.move_to_element(element).move_by_offset(offset_x, offset_y).perform()
+
+    def get_user_agent(self):
+        """Get User-Agent from current browser"""
+        return self.driver.execute_script('return navigator.userAgent;')
+
     def crawl(self, **kwargs):
         """
         Crawling method
