@@ -5,6 +5,7 @@ from selenium.common.exceptions import NoSuchElementException, NoAlertPresentExc
 from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 
 class Crawler(object):
@@ -112,6 +113,10 @@ class Crawler(object):
         """Get User-Agent from current browser"""
         return self.driver.execute_script('return navigator.userAgent;')
 
+    def send_keys(self, key):
+        """Send keys"""
+        ActionChains(self.driver).send_keys(key).perform()
+
     def crawl(self, **kwargs):
         """
         Crawling method
@@ -119,3 +124,5 @@ class Crawler(object):
         :return:
         """
         raise NotImplementedError()
+
+
