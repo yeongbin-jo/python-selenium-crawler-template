@@ -3,27 +3,34 @@ from functools import wraps
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, NoAlertPresentException
 from selenium.webdriver import ActionChains
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 
 
 class Crawler(object):
-    def __init__(self, headless=True, window_size='1920,1080', additional_options=[], timeout=3):
-        options = Options()
-        options.headless = headless
-        if window_size:
-            options.add_argument(f'--window-size={window_size}')
-        for o in additional_options:
-            options.add_argument(o)
-        self.driver = webdriver.Chrome(options=options)
+    def __init__(self, headless=True, window_size='1920,1080', additional_options=(), timeout=3, browser_type='chrome'):
+        if browser_type == 'firefox':
+            options = FirefoxOptions()
+            options.headless = headless
+            self.driver = webdriver.Firefox(options=options)
+            if window_size:
+                self.driver.set_window_size(*[int(token) for token in window_size.split(',')])
+        else:
+            options = ChromeOptions()
+            options.headless = headless
+            if window_size:
+                options.add_argument(f'--window-size={window_size}')
+            for o in additional_options:
+                options.add_argument(o)
+            self.driver = webdriver.Chrome(options=options)
         self.timeout = timeout
         self.driver.implicitly_wait(self.timeout)
 
     def __enter__(self):
         return self
 
-    def __exit__(self, type, value, traceback):
+    def __exit__(self, _type, value, traceback):
         self.close()
 
     def close(self):

@@ -8,7 +8,7 @@ from setuptools import setup
 __author__ = 'Yeongbin Jo <yeongbin.jo@pylab.co>'
 __license__ = "GPLv3"
 
-__version__ = "0.1.2"
+__version__ = "0.2.0"
 __maintainer__ = "Yeongbin Jo"
 __email__ = "yeongbin.jo@pylab.co"
 __status__ = "Production"
@@ -35,7 +35,7 @@ elif sys.argv[-1] == 'clean':
 
 setup(
     name="selenium-crawler-template",
-    version="0.1.2",
+    version=__version__,
     author="Yeongbin Jo",
     author_email="yeongbin.jo@pylab.co",
     description="Boilerplate for developing crawler with Selenium.",
@@ -53,10 +53,6 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
