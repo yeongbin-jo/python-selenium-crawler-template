@@ -23,6 +23,7 @@ class Crawler(object):
                 options.add_argument(f'--window-size={window_size}')
             for o in additional_options:
                 options.add_argument(o)
+            options.add_experimental_option("prefs", {"enable_do_not_track": True})
             self.driver = webdriver.Chrome(options=options)
         self.timeout = timeout
         self.driver.implicitly_wait(self.timeout)
