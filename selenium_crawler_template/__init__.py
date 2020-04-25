@@ -74,27 +74,27 @@ class Crawler(object):
 
         return wrapper
 
-    def find_element(self, css_selector, from_element=None, timeout=3):
+    def find_element(self, selector, from_element=None, timeout=3, xpath=False):
         """Find dom element via CSS selector w/o NoSuchElementException"""
         if not from_element:
             from_element = self.driver
         self.driver.implicitly_wait(timeout)
         ele = None
         try:
-            ele = from_element.find_element(By.CSS_SELECTOR, css_selector)
+            ele = from_element.find_element(By.XPATH if xpath else By.CSS_SELECTOR, selector)
         except NoSuchElementException:
             pass
         self.driver.implicitly_wait(self.timeout)
         return ele
 
-    def find_elements(self, css_selector, from_element=None, timeout=3):
+    def find_elements(self, selector, from_element=None, timeout=3, xpath=False):
         """Find dom elements via CSS selector w/o NoSuchElementException"""
         if not from_element:
             from_element = self.driver
         self.driver.implicitly_wait(timeout)
         eles = []
         try:
-            eles = from_element.find_elements(By.CSS_SELECTOR, css_selector)
+            eles = from_element.find_elements(By.XPATH if xpath else By.CSS_SELECTOR, selector)
         except NoSuchElementException:
             pass
         self.driver.implicitly_wait(self.timeout)
