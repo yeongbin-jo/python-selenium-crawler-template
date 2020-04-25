@@ -6,6 +6,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
 
 
 class Crawler(object):
@@ -50,6 +51,27 @@ class Crawler(object):
         :return:
         """
         self.driver.execute_script(f"document.scrollingElement.scrollTop = '{height}';")
+
+    def get_rect(self, ele: WebElement) -> dict:
+        """
+        Get relative BoundingClientRect from element
+
+        :param ele: A target element
+        :return: relative BoundingClientRect
+        """
+        # {'bottom': 954, 'height': 946, 'left': 8, 'right': 1192, 'top': 8, 'width': 1184, 'x': 8, 'y': 8}
+        body_rect = self.driver.execute_script('return document.body.getBoundingClientRect().toJSON();')
+        elem_rect = self.driver.execute_script('return arguments[0].getBoundingClientRect().toJSON();', ele)
+        return {
+            'bottom': elem_rect['bottom'] - body_rect['top'],
+            'top': elem_rect['top'] - body_rect['top'],
+            'left': elem_rect['left'] - body_rect['left'],
+            'right': elem_rect['right'] - body_rect['left'],
+            'x': elem_rect['x'] - body_rect['x'],
+            'y': elem_rect['y'] - body_rect['y'],
+            'width': elem_rect['width'],
+            'height': elem_rect['height']
+        }
 
     @staticmethod
     def open_url_in_new_tab(func):
