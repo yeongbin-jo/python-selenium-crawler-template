@@ -24,7 +24,14 @@ class Crawler(object):
                 options.add_argument(f'--window-size={window_size}')
             for o in additional_options:
                 options.add_argument(o)
+            options.add_argument('--ignore-certificate-errors')
+            options.add_argument('disable-infobars')
+            options.add_argument('--disable-notifications')
+            options.add_argument('--no-sandbox')
+            options.add_experimental_option("excludeSwitches", ["enable-automation"])
+            options.add_experimental_option('useAutomationExtension', False)
             options.add_experimental_option("prefs", {"enable_do_not_track": True})
+
             self.driver = webdriver.Chrome(options=options)
         self.timeout = timeout
         self.driver.implicitly_wait(self.timeout)

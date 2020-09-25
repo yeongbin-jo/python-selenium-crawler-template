@@ -8,7 +8,7 @@ from setuptools import setup
 __author__ = 'Yeongbin Jo <yeongbin.jo@pylab.co>'
 __license__ = "GPLv3"
 
-__version__ = "0.3.1"
+__version__ = "0.4.0"
 __maintainer__ = "Yeongbin Jo"
 __email__ = "yeongbin.jo@pylab.co"
 __status__ = "Production"
